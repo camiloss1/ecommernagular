@@ -14,7 +14,8 @@ import { OutsideModule } from './UI/layouts/outside/outside.module';
     BrowserModule,
     AppRoutingModule,
     DefaultModule,
-    OutsideModule
+    OutsideModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

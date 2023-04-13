@@ -4,6 +4,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { OutsideComponent } from './outside.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from '../../components/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -12,7 +14,10 @@ import { LoginComponent } from '../../components/login/login.component';
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

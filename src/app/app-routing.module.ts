@@ -4,12 +4,14 @@ import { HomeComponent } from './UI/components/home/home.component';
 import { LoginComponent } from './UI/components/login/login.component';
 import { DefaultComponent } from './UI/layouts/default/default.component';
 import { OutsideComponent } from './UI/layouts/outside/outside.component';
+import { GuardGuard } from './UI/shared/guard/guard.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: '',
     component: DefaultComponent,
+    canActivate: [GuardGuard],
     children: [
       {
         path: 'home',
