@@ -5,12 +5,13 @@ import { OutsideComponent } from './outside.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from '../../components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SignupComponent } from '../../components/signup/signup.component';
 
 
 
 
 @NgModule({
-  declarations: [OutsideComponent, LoginComponent],
+  declarations: [OutsideComponent, LoginComponent, SignupComponent],
   imports: [
     CommonModule,
     SharedModule,

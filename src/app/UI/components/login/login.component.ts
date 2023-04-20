@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserUseCase } from 'src/app/domain/usecases/userusecases';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private _userUseCase: UserUseCase) { }
   loginForm!: FormGroup;
   validationMessages = {
     email: [
@@ -46,15 +47,28 @@ export class LoginComponent implements OnInit {
     var email = this.loginForm.controls['email'].value;
     var password = this.loginForm.controls['password'].value;
     if (this.loginForm.valid) {
-      localStorage.setItem('email', email);
-      localStorage.setItem('password', password);
-      Swal.fire({
-        title: 'Logueado',
-        text: 'Bienvenido al sistema',
-        icon: 'success'
-      }
-      )
-      this.router.navigate(['/home'])
+      let response = this._userUseCase.login(email, password);
+      response.subscribe((data: any) => {
+        if (data) {
+          localStorage.setItem('email', data.email);
+          localStorage.setItem('document', data.document);
+          Swal.fire({
+            title: 'Logueado',
+            text: 'Bienvenido al sistema ' + data.name,
+            icon: 'success'
+          }
+          )
+          this.router.navigate(['/home'])
+          return;
+        }
+        Swal.fire({
+          title: 'Alert!',
+          text: 'Usuario o contraseña invalido',
+          icon: 'error'
+        }
+        )
+        return;
+      })
     } else {
       Swal.fire({
         title: 'Alert!',
